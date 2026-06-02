@@ -176,16 +176,15 @@ Resultados obtenidos tras ejecutar el pipeline de clasificación entrenado en el
 
 ## 4. Análisis de Errores
 
-- **Falsos Negativos (Casos 1, 4, 5):** El modelo falló al detectar SQLi, Command Injection y Path Traversal. 
+- **Falsos Negativos (Casos 1, 3, 4, 5):** El modelo falló al detectar SQLi, XSS, Command Injection y Path Traversal. 
     - **Causa:** El dataset de entrenamiento contenía muchos ejemplos sintéticos donde las palabras `SELECT`, `FROM` y `os` estaban sobre-representadas en la clase segura. El modelo aprendió que la presencia de estas palabras indica seguridad, ignorando la concatenación `+`.
 - **Sesgo de Tokens:** El enfoque TF-IDF trata el código como texto. No entiende la semántica de la concatenación vs. la parametrización. Si el token `+` no tiene un peso masivo hacia `vulnerable`, el modelo se confunde.
 
 ## 5. Propuesta de Mejora
 
-**Mejora Propuesta: Análisis Semántico con Word Embeddings y Enfoque en Operadores.**
-1.  **Representación:** Cambiar TF-IDF por representaciones más ricas como **CodeBERT** o **Graph Neural Networks (GNN)** que capturen el Data Flow Graph y Control Flow Graph.
-2.  **Dataset:** Incrementar la calidad del dataset con ejemplos reales de CVEs en lugar de ejemplos sintéticos cortos.
-3.  **Hibridación:** Combinar el clasificador con una herramienta de análisis estático (SAST) que detecte específicamente el uso de operadores de concatenación en sinks peligrosos.
+**Mejora Propuesta: Análisis Semántico con Enfoque en Operadores.**
+1.  **Dataset:** Incrementar la calidad del dataset con ejemplos reales de CVEs en lugar de ejemplos sintéticos cortos.
+3.  **Hibridación:** Combinar el clasificador con una herramienta de análisis estático (SAST: Static Application Security Testing) que detecte específicamente el uso de operadores de concatenación en sinks peligrosos. (ej. SonarQube).
 
 ## Conclusión
 
