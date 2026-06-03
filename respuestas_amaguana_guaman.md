@@ -2,7 +2,7 @@
 
 **Estudiantes:** Kevin Amaguana - Daniel Guamán  
 **Fecha:** 2 de junio de 2026  
-**Curso:** Minería de Datos aplicada a Ciberseguridad  
+**Materia:** Desarrollo de Software Seguro
 
 ---
 
@@ -265,9 +265,9 @@ Un valor alto fuera de la diagonal principal indica **errores de clasificación*
 - **Ejemplo**: Si `cm[A03_Injection, A01_Access_Control] = 5`, significa que 5 fragmentos de A03 fueron incorrectamente clasificados como A01
 
 **Implicaciones:**
-- 📊 **Alta en fila i**: La clase i no se está detectando bien (bajo recall)
-- 📊 **Alta en columna j**: Se está sobre-prediciendo la clase j (bajo precision)
-- 🔍 **Acción requerida**: Revisar qué features diferencian esas clases y agregar más ejemplos
+- **Alta en fila i**: La clase i no se está detectando bien (bajo recall)
+- **Alta en columna j**: Se está sobre-prediciendo la clase j (bajo precision)
+- **Acción requerida**: Revisar qué features diferencian esas clases y agregar más ejemplos
 
 **Pregunta 3: Calcula manualmente la precision para la clase `A03_Injection`**
 
@@ -289,7 +289,7 @@ $$\text{precision} = \frac{TP}{TP + FP} = \frac{cm[A03, A03]}{\sum_{i} cm[i, A03
 A03_Injection       precision=1.00  recall=0.75  f1-score=0.86  support=8
 ```
 
-✅ **Confirmado**: precision = 1.00 coincide con nuestro cálculo manual.
+**Confirmado**: precision = 1.00 coincide con nuestro cálculo manual.
 
 **Interpretación:** Cuando el modelo predice A03_Injection, **siempre acierta** (precision perfecta), pero solo detecta el 75% de los casos reales (recall=0.75), dejando escapar 2 de 8 fragmentos.
 
@@ -382,7 +382,7 @@ def hash_password(password):
 
 ---
 
-#### Reflexión adicional (150 palabras):
+#### Reflexión adicional:
 
 **¿En cuál de los tres casos confías más en la predicción del modelo y por qué?**
 
@@ -484,15 +484,4 @@ El notebook implementa un pipeline sólido de clasificación multiclase de vulne
 
 **Lección principal:** Un modelo con 100% de accuracy en datos sintéticos puede tener 60-70% en producción si no se valida adecuadamente. La explicabilidad (SHAP/LIME) es crucial para entender estas limitaciones antes de desplegar.
 
----
-
-## Referencias
-
-- Notebook base: `Taller_02_OWASP_Top10_Mineria_Datos.ipynb`
-- OWASP Top 10 (2021): https://owasp.org/Top10/
-- SHAP: Lundberg & Lee (2017) - https://github.com/shap/shap
-- LIME: Ribeiro et al. (2016) - https://github.com/marcotcr/lime
-- Dataset recomendado: DiverseVul - https://www.kaggle.com/datasets/
-
----
 
